@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@class CUITextView;
+
+@interface ViewController : UIViewController <UITextViewDelegate, UIScrollViewDelegate>
+
+
+@property (nonatomic, strong) IBOutlet CUITextView* cTextView;
+
+- (IBAction) setColor;
 
 @end

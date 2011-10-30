@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D27F0F8A145DC739008D80C9 /* Menlo.ttc in Resources */ = {isa = PBXBuildFile; fileRef = D27F0F89145DC739008D80C9 /* Menlo.ttc */; };
 		D2DE67B3145356330051C964 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2DE67B2145356330051C964 /* UIKit.framework */; };
 		D2DE67B5145356330051C964 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2DE67B4145356330051C964 /* Foundation.framework */; };
 		D2DE67B7145356330051C964 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2DE67B6145356330051C964 /* CoreGraphics.framework */; };
@@ -15,22 +16,31 @@
 		D2DE67C3145356330051C964 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D2DE67C2145356330051C964 /* AppDelegate.m */; };
 		D2DE67C6145356330051C964 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2DE67C4145356330051C964 /* MainStoryboard.storyboard */; };
 		D2DE67C9145356330051C964 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2DE67C8145356330051C964 /* ViewController.m */; };
+		D2DE67D51453580C0051C964 /* CUITextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2DE67D41453580C0051C964 /* CUITextView.m */; };
+		D2DE67D8145358CF0051C964 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2DE67D6145358C60051C964 /* CoreText.framework */; };
+		D2DE67DB145359790051C964 /* NSAttributedString+Attributes.m in Sources */ = {isa = PBXBuildFile; fileRef = D2DE67DA145359790051C964 /* NSAttributedString+Attributes.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D27F0F89145DC739008D80C9 /* Menlo.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Menlo.ttc; sourceTree = SOURCE_ROOT; };
 		D2DE67AE145356330051C964 /* textview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = textview.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2DE67B2145356330051C964 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D2DE67B4145356330051C964 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2DE67B6145356330051C964 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		D2DE67BA145356330051C964 /* textview-Info.plist */ = {isa = PBXFileReference; path = "textview-Info.plist"; sourceTree = "<group>"; };
+		D2DE67BA145356330051C964 /* textview-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "textview-Info.plist"; sourceTree = "<group>"; };
 		D2DE67BC145356330051C964 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D2DE67BE145356330051C964 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D2DE67C0145356330051C964 /* textview-Prefix.pch */ = {isa = PBXFileReference; path = "textview-Prefix.pch"; sourceTree = "<group>"; };
-		D2DE67C1145356330051C964 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		D2DE67C0145356330051C964 /* textview-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "textview-Prefix.pch"; sourceTree = "<group>"; };
+		D2DE67C1145356330051C964 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D2DE67C2145356330051C964 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D2DE67C5145356330051C964 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		D2DE67C7145356330051C964 /* ViewController.h */ = {isa = PBXFileReference; path = ViewController.h; sourceTree = "<group>"; };
+		D2DE67C7145356330051C964 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		D2DE67C8145356330051C964 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D2DE67D31453580C0051C964 /* CUITextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUITextView.h; sourceTree = "<group>"; };
+		D2DE67D41453580C0051C964 /* CUITextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CUITextView.m; sourceTree = "<group>"; };
+		D2DE67D6145358C60051C964 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		D2DE67D9145359790051C964 /* NSAttributedString+Attributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+Attributes.h"; sourceTree = "<group>"; };
+		D2DE67DA145359790051C964 /* NSAttributedString+Attributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Attributes.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2DE67D8145358CF0051C964 /* CoreText.framework in Frameworks */,
 				D2DE67B3145356330051C964 /* UIKit.framework in Frameworks */,
 				D2DE67B5145356330051C964 /* Foundation.framework in Frameworks */,
 				D2DE67B7145356330051C964 /* CoreGraphics.framework in Frameworks */,
@@ -67,6 +78,7 @@
 		D2DE67B1145356330051C964 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D2DE67D6145358C60051C964 /* CoreText.framework */,
 				D2DE67B2145356330051C964 /* UIKit.framework */,
 				D2DE67B4145356330051C964 /* Foundation.framework */,
 				D2DE67B6145356330051C964 /* CoreGraphics.framework */,
@@ -82,6 +94,10 @@
 				D2DE67C4145356330051C964 /* MainStoryboard.storyboard */,
 				D2DE67C7145356330051C964 /* ViewController.h */,
 				D2DE67C8145356330051C964 /* ViewController.m */,
+				D2DE67D9145359790051C964 /* NSAttributedString+Attributes.h */,
+				D2DE67DA145359790051C964 /* NSAttributedString+Attributes.m */,
+				D2DE67D31453580C0051C964 /* CUITextView.h */,
+				D2DE67D41453580C0051C964 /* CUITextView.m */,
 				D2DE67B9145356330051C964 /* Supporting Files */,
 			);
 			path = textview;
@@ -92,6 +108,7 @@
 			children = (
 				D2DE67BA145356330051C964 /* textview-Info.plist */,
 				D2DE67BB145356330051C964 /* InfoPlist.strings */,
+				D27F0F89145DC739008D80C9 /* Menlo.ttc */,
 				D2DE67BE145356330051C964 /* main.m */,
 				D2DE67C0145356330051C964 /* textview-Prefix.pch */,
 			);
@@ -151,6 +168,7 @@
 			files = (
 				D2DE67BD145356330051C964 /* InfoPlist.strings in Resources */,
 				D2DE67C6145356330051C964 /* MainStoryboard.storyboard in Resources */,
+				D27F0F8A145DC739008D80C9 /* Menlo.ttc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +182,8 @@
 				D2DE67BF145356330051C964 /* main.m in Sources */,
 				D2DE67C3145356330051C964 /* AppDelegate.m in Sources */,
 				D2DE67C9145356330051C964 /* ViewController.m in Sources */,
+				D2DE67D51453580C0051C964 /* CUITextView.m in Sources */,
+				D2DE67DB145359790051C964 /* NSAttributedString+Attributes.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +259,7 @@
 		D2DE67CD145356330051C964 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "textview/textview-Prefix.pch";
 				INFOPLIST_FILE = "textview/textview-Info.plist";
@@ -250,6 +271,7 @@
 		D2DE67CE145356330051C964 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "textview/textview-Prefix.pch";
 				INFOPLIST_FILE = "textview/textview-Info.plist";
@@ -277,6 +299,7 @@
 				D2DE67CE145356330051C964 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

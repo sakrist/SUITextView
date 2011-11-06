@@ -13,14 +13,22 @@
 @interface CUITextView : UITextView  {
 	NSMutableAttributedString* _attributedText; //!< Internally mutable, but externally immutable copy 
     CTFrameRef textFrame;
+    
 	CGRect drawingRect;
-
 }
 
-@property(nonatomic, copy) NSAttributedString* attributedText; //!< Use this instead of the "text" property inherited from UILabel to set and get text
 
+
+@property (nonatomic, copy) NSAttributedString* attributedText; 
+@property (nonatomic) BOOL draw;
+
+@property short int fontSize;
 
 - (void) resetAttributedText;
+
+- (NSMutableAttributedString*) setColor:(UIColor*)color words:(NSArray*)words inText:(NSMutableAttributedString*)mutableAttributedString;
+
+- (void) highlightingText: (NSMutableAttributedString*) mutableAttributedString;
 
 
 @end

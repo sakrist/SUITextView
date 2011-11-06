@@ -8,13 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@class CUITextView;
+@class CUITextViewHighlighting;
 
 @interface ViewController : UIViewController <UITextViewDelegate, UIScrollViewDelegate>
 
+@property (nonatomic, strong) IBOutlet UILabel *lbl;
 
-@property (nonatomic, strong) IBOutlet CUITextView* cTextView;
 
-- (IBAction) setColor;
+@property (nonatomic, strong) IBOutlet CUITextViewHighlighting* cTextView;
+
+- (IBAction) showtext;
+- (IBAction) draw;
 
 @end

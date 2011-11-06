@@ -12,103 +12,12 @@
 
 #import "NSAttributedString+Attributes.h"
 
-/////////////////////////////////////////////////////////////////////////////
-// MARK: Private Utility methods
-
-CGPoint CGPointFlipped(CGPoint point, CGRect bounds);
-CGRect CGRectFlipped(CGRect rect, CGRect bounds);
-NSRange NSRangeFromCFRange(CFRange range);
-CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin);
-CGRect CTRunGetTypographicBoundsAsRect(CTRunRef run, CTLineRef line, CGPoint lineOrigin);
-BOOL CTLineContainsCharactersFromStringRange(CTLineRef line, NSRange range);
-BOOL CTRunContainsCharactersFromStringRange(CTRunRef run, NSRange range);
-
-/////////////////////////////////////////////////////////////////////////////
-// MARK: -
-/////////////////////////////////////////////////////////////////////////////
-
-
-//CTTextAlignment CTTextAlignmentFromUITextAlignment(UITextAlignment alignment) {
-//	switch (alignment) {
-//		case UITextAlignmentLeft: return kCTLeftTextAlignment;
-//		case UITextAlignmentCenter: return kCTCenterTextAlignment;
-//		case UITextAlignmentRight: return kCTRightTextAlignment;
-//		case UITextAlignmentJustify: return kCTJustifiedTextAlignment; /* special OOB value if we decide to use it even if it's not really standard... */
-//		default: return kCTNaturalTextAlignment;
-//	}
-//}
-//
-//CTLineBreakMode CTLineBreakModeFromUILineBreakMode(UILineBreakMode lineBreakMode) {
-//	switch (lineBreakMode) {
-//		case UILineBreakModeWordWrap: return kCTLineBreakByWordWrapping;
-//		case UILineBreakModeCharacterWrap: return kCTLineBreakByCharWrapping;
-//		case UILineBreakModeClip: return kCTLineBreakByClipping;
-//		case UILineBreakModeHeadTruncation: return kCTLineBreakByTruncatingHead;
-//		case UILineBreakModeTailTruncation: return kCTLineBreakByTruncatingTail;
-//		case UILineBreakModeMiddleTruncation: return kCTLineBreakByTruncatingMiddle;
-//		default: return 0;
-//	}
-//}
-
-// Don't use this method for origins. Origins always depend on the height of the rect.
-CGPoint CGPointFlipped(CGPoint point, CGRect bounds) {
-	return CGPointMake(point.x, CGRectGetMaxY(bounds)-point.y);
-}
-
-CGRect CGRectFlipped(CGRect rect, CGRect bounds) {
-	return CGRectMake(CGRectGetMinX(rect),
-					  CGRectGetMaxY(bounds)-CGRectGetMaxY(rect),
-					  CGRectGetWidth(rect),
-					  CGRectGetHeight(rect));
-}
-
-NSRange NSRangeFromCFRange(CFRange range) {
-	return NSMakeRange(range.location, range.length);
-}
-
-// Font Metrics: http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/FontHandling/Tasks/GettingFontMetrics.html
-CGRect CTLineGetTypographicBoundsAsRect(CTLineRef line, CGPoint lineOrigin) {
-	CGFloat ascent = 0;
-	CGFloat descent = 0;
-	CGFloat leading = 0;
-	CGFloat width = CTLineGetTypographicBounds(line, &ascent, &descent, &leading);
-	CGFloat height = ascent + descent /* + leading */;
-	
-	return CGRectMake(lineOrigin.x,
-					  lineOrigin.y - descent,
-					  width,
-					  height);
-}
-
-CGRect CTRunGetTypographicBoundsAsRect(CTRunRef run, CTLineRef line, CGPoint lineOrigin) {
-	CGFloat ascent = 0;
-	CGFloat descent = 0;
-	CGFloat leading = 0;
-	CGFloat width = CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &ascent, &descent, &leading);
-	CGFloat height = ascent + descent /* + leading */;
-	
-	CGFloat xOffset = CTLineGetOffsetForStringIndex(line, CTRunGetStringRange(run).location, NULL);
-	
-	return CGRectMake(lineOrigin.x + xOffset,
-					  lineOrigin.y - descent,
-					  width,
-					  height);
-}
-
-BOOL CTLineContainsCharactersFromStringRange(CTLineRef line, NSRange range) {
-	NSRange lineRange = NSRangeFromCFRange(CTLineGetStringRange(line));
-	NSRange intersectedRange = NSIntersectionRange(lineRange, range);
-	return (intersectedRange.length > 0);
-}
-
-BOOL CTRunContainsCharactersFromStringRange(CTRunRef run, NSRange range) {
-	NSRange runRange = NSRangeFromCFRange(CTRunGetStringRange(run));
-	NSRange intersectedRange = NSIntersectionRange(runRange, range);
-	return (intersectedRange.length > 0);
-}
-
 
 @implementation CUITextView
+
+@synthesize draw=_draw;
+
+@synthesize fontSize=_fontSize;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -119,68 +28,74 @@ BOOL CTRunContainsCharactersFromStringRange(CTRunRef run, NSRange range) {
     return self;
 }
 
-
-
-
-
 - (void) awakeFromNib {
+        
+    self.fontSize = 14;
+    
+    _draw = YES;
     [self setAutocapitalizationType:UITextAutocapitalizationTypeNone];
-    [self setText:self.text];
     [self setTextColor:[UIColor clearColor]];
-    [self setFont:[UIFont fontWithName:@"Menlo" size:12]];
+    [self setFont:[UIFont fontWithName:@"Menlo" size:_fontSize]];
+    [self setText:self.text];
 }
 
+
 - (void)setText:(NSString *)text {
+    
     text = [text stringByReplacingOccurrencesOfString:@"\t" withString:@"    "];
     
 	[super setText:text]; // will call setNeedsDisplay too
 	[self resetAttributedText];
 }
 
-- (void) resetAttributedText {
-    
 
-    NSMutableAttributedString* mutAttrStr = [NSMutableAttributedString attributedStringWithString:self.text];
-
-	[mutAttrStr setTextColor:[UIColor blackColor]];
-    [mutAttrStr setFont:[UIFont fontWithName:@"Menlo" size:12]];
-   
+- (NSMutableAttributedString*) setColor:(UIColor*)color words:(NSArray*)words inText:(NSMutableAttributedString*)mutableAttributedString {
     
+    NSUInteger count = 0, length = [mutableAttributedString length];
+    NSRange range = NSMakeRange(0, length);
     
-    NSUInteger count = 0, length = [self.text length];
-    NSRange range = NSMakeRange(0, length); 
-    while(range.location != NSNotFound)
-    {
-        range = [self.text rangeOfString:@"code" options:0 range:range];
-        if(range.location != NSNotFound)
-        {
-            [mutAttrStr setTextColor:[UIColor blueColor] range:NSMakeRange(range.location, 4) ];
-            range = NSMakeRange(range.location + range.length, length - (range.location + range.length));
-            count++; 
-            
-        }
-    }
-    
-    NSArray *array = [NSArray arrayWithObjects:@"void", @"self", @"while", @"if", @"else", @"for", nil];
-    
-    
-    UIColor *opColor = [UIColor colorWithRed:193.f/255.f green:63.f/255.f blue:178.f/255.f alpha:1];
-    
-    for (NSString *op in array) {
-        count = 0, length = [self.text length];
+    for (NSString *op in words) {
+        count = 0, length = [mutableAttributedString length];
         range = NSMakeRange(0, length); 
         while(range.location != NSNotFound)
         {
-            range = [self.text rangeOfString:op options:0 range:range];
+            range = [[mutableAttributedString string] rangeOfString:op options:0 range:range];
             if(range.location != NSNotFound) {
-                [mutAttrStr setTextColor:opColor range:NSMakeRange(range.location, [op length])];
+                [mutableAttributedString setTextColor:color range:NSMakeRange(range.location, [op length])];
                 range = NSMakeRange(range.location + range.length, length - (range.location + range.length));
                 count++; 
             }
         }
     }
-    self.attributedText = mutAttrStr;
+    
+    return mutableAttributedString;
 }
+
+
+- (void) highlightingText: (NSMutableAttributedString*) mutableAttributedString {
+    
+}
+
+
+
+
+- (void) resetAttributedText {    
+
+    NSMutableAttributedString* mutableAttributedString = [NSMutableAttributedString attributedStringWithString:self.text];
+
+	[mutableAttributedString setTextColor:[UIColor blackColor]];
+    [mutableAttributedString setFont:self.font];
+    
+   
+    [self highlightingText:mutableAttributedString];
+    
+    self.attributedText = mutableAttributedString;
+    
+    [self setTextAlignment:UITextAlignmentLeft];
+    
+}
+
+
 
 - (NSAttributedString *) attributedText {
 	if (!_attributedText) {
@@ -188,6 +103,8 @@ BOOL CTRunContainsCharactersFromStringRange(CTRunRef run, NSRange range) {
 	}
 	return [[_attributedText copy] autorelease]; // immutable autoreleased copy
 }
+
+
 - (void) setAttributedText:(NSAttributedString*)attributedText {
 	[_attributedText release];
 	_attributedText = [attributedText mutableCopy];
@@ -203,19 +120,24 @@ BOOL CTRunContainsCharactersFromStringRange(CTRunRef run, NSRange range) {
 }
 
 - (void) setNeedsDisplay {
+
 	[self resetTextFrame];
 	[super setNeedsDisplay];
 }
 
 
-- (void)drawRect:(CGRect)aRect
-{
+- (void)drawRect:(CGRect)aRect {
     
- //   NSLog(@"%@ %@", NSStringFromCGRect(aRect), NSStringFromCGRect(self.bounds));
+    if (!_draw) {
+        return;
+    }
+    
+    short int cfontSize = self.font.lineHeight;
+    
     
     CGRect r = self.bounds;
     r.origin.y = self.contentOffset.y;
-    r.size.height = self.contentSize.height;
+
     [[UIColor clearColor] setFill];
 	if (_attributedText) {
 		CGContextRef ctx = UIGraphicsGetCurrentContext();
@@ -223,22 +145,88 @@ BOOL CTRunContainsCharactersFromStringRange(CTRunRef run, NSRange range) {
 		
 		// flipping the context to draw core text
 		// no need to flip our typographical bounds from now on
-		CGContextConcatCTM(ctx, CGAffineTransformScale(CGAffineTransformMakeTranslation(8, r.size.height+8), 1.f, -1.f));
+		CGContextConcatCTM(ctx, CGAffineTransformScale(CGAffineTransformMakeTranslation(0, r.size.height+6.5), 1.f, -1.f));
 
         
         NSMutableAttributedString* attrStrWithLinks = [self.attributedText mutableCopy];
         
 		if (textFrame == NULL) {
-			CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attrStrWithLinks);
 
-			drawingRect = CGRectMake(0, 0, self.bounds.size.width-16, r.size.height);
+            
+            NSArray *paragraphs = [self.text componentsSeparatedByString:@"\n"];
+            
+            CGSize constraint = CGSizeMake(self.bounds.size.width-8, 999999 /*arbitrarily large number*/);
+            NSInteger paragraphNo = 0;
+            CGFloat offset = 0;
+            
+            NSInteger fromlocation = 0;
+            
+            int linesheight = 0;
+            
+            for (NSString* paragraph in paragraphs) {
+                
+                // replace \t on spaces
+                NSString *_paragraph = [paragraph stringByReplacingOccurrencesOfString:@"\t" withString:@"        "];
+                CGSize paragraphSize = [_paragraph sizeWithFont:self.font 
+                                             constrainedToSize:constraint 
+                                                 lineBreakMode:UILineBreakModeWordWrap];
+                
+                offset += paragraphSize.height;
+                
+                if (paragraphSize.height == 0) {
+                    offset += self.font.lineHeight;
+                }
+                
+                
+                
+                if(offset > self.contentOffset.y) {
+                    int linescount = paragraphSize.height/cfontSize;
+                
+                    if (linescount > 1) {
+
+                        int visible = (int)offset%(int)self.contentOffset.y;
+
+                        linesheight = (paragraphSize.height/cfontSize) - visible /cfontSize;
+                        
+                        if (visible % cfontSize == 0) {
+                            linesheight++;
+                        }
+                        
+                        linesheight--;
+                        if (linesheight < 0) {
+                            linesheight = 0;
+                        }
+                    }
+                    
+                    break;
+                }
+                
+                fromlocation += [paragraph length]+1;
+                
+                paragraphNo++;
+            }   
+            
+            // find visible paragraph
+            
+            int delta = (int)self.contentOffset.y % cfontSize +linesheight*cfontSize;
+            
+            if (self.contentOffset.y < 0) {
+                delta = self.contentOffset.y;
+            }
             
             
-			CGMutablePathRef path = CGPathCreateMutable();
-			CGPathAddRect(path, NULL, drawingRect);
-//            drawingRect.size.height += 1;
-			textFrame = CTFramesetterCreateFrame(framesetter,CFRangeMake(0,0), path, NULL);
+           // NSLog(@"%d", delta);
             
+            CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attrStrWithLinks);
+            
+            drawingRect = CGRectMake(0, -r.origin.y, self.bounds.size.width-8, r.size.height+delta);
+            
+            CGMutablePathRef path = CGPathCreateMutable();
+            CGPathAddRect(path, NULL, drawingRect);
+            
+            textFrame = CTFramesetterCreateFrame(framesetter, CFRangeMake(fromlocation,0), path, NULL);
+
+                        
 			CGPathRelease(path);
 			CFRelease(framesetter);
 		}

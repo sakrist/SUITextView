@@ -7,11 +7,13 @@
 //
 
 #import "ViewController.h"
-#import "CUITextView.h"
+#import "CUITextViewHighlighting.h"
 
 @implementation ViewController
 
 @synthesize cTextView=_cTextView;
+
+@synthesize lbl=_lbl;
 
 - (void)didReceiveMemoryWarning
 {
@@ -19,7 +21,7 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (IBAction) setColor {
+- (IBAction) showtext {
     if ([_cTextView.textColor isEqual:[UIColor blackColor]])
     {
         [_cTextView setTextColor:[UIColor clearColor]];
@@ -27,6 +29,24 @@
         [_cTextView setTextColor:[UIColor blackColor]];
     }
 }
+
+- (IBAction) draw {
+    if ([_cTextView draw])
+    {
+        [_cTextView setDraw:NO];
+    } else {
+        [_cTextView setDraw:YES];
+    }
+    [_cTextView setNeedsDisplay];
+}
+
+
+- (IBAction) setSize: (UIStepper*)stepper {
+    [_cTextView setFont:[UIFont fontWithName:[_cTextView.font familyName] size:stepper.value]];
+    [_lbl setText:[NSString stringWithFormat:@"%d", (int)stepper.value]];
+}
+
+
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
     return YES;
@@ -42,8 +62,7 @@
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
-//    [textView setText:textView.text];
-//    [textView setNeedsDisplay];
+
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
@@ -60,20 +79,10 @@
 
 - (void) scrollViewDidScroll: (UIScrollView*) scrollView {
     // 
-    NSLog(@"scrollViewDidScroll The scroll offset is ---%f",scrollView.contentOffset.y); 
+  //  NSLog(@"scrollViewDidScroll The scroll offset is ---%f",scrollView.contentOffset.y); 
     [scrollView setNeedsDisplay];
     
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -86,7 +95,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    NSLog(@"%@", [UIFont familyNames]);
+    //NSLog(@"%@", [UIFont familyNames]);
 }
 
 - (void)viewDidUnload

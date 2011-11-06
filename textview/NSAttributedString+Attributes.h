@@ -1,33 +1,4 @@
-/***********************************************************************************
- *
- * Copyright (c) 2010 Olivier Halligon
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- * 
- ***********************************************************************************
- *
- * Created by Olivier Halligon  (AliSoftware) on 20 Jul. 2010.
- *
- * Any comment or suggestion welcome. Please contact me before using this class in
- * your projects. Referencing this project in your AboutBox/Credits is appreciated.
- *
- ***********************************************************************************/
+
 
 
 #import <Foundation/Foundation.h>
@@ -40,7 +11,7 @@
 // MARK: NSAttributedString Additions
 /////////////////////////////////////////////////////////////////////////////
 
-@interface NSAttributedString (OHCommodityConstructors)
+@interface NSAttributedString (Additions)
 +(id)attributedStringWithString:(NSString*)string;
 +(id)attributedStringWithAttributedString:(NSAttributedString*)attrStr;
 
@@ -57,11 +28,12 @@
 // MARK: NSMutableAttributedString Additions
 /////////////////////////////////////////////////////////////////////////////
 
-@interface NSMutableAttributedString (OHCommodityStyleModifiers)
+@interface NSMutableAttributedString (Additions)
+
 -(void)setFont:(UIFont*)font;
 -(void)setFont:(UIFont*)font range:(NSRange)range;
--(void)setFontName:(NSString*)fontName size:(CGFloat)size;
--(void)setFontName:(NSString*)fontName size:(CGFloat)size range:(NSRange)range;
+-(void)setFontName:(NSString*)fontName size:(CGFloat)size lineHeight:(CGFloat)lineHeight;
+-(void)setFontName:(NSString*)fontName size:(CGFloat)size range:(NSRange)range lineHeight:(CGFloat)lineHeight;
 -(void)setFontFamily:(NSString*)fontFamily size:(CGFloat)size bold:(BOOL)isBold italic:(BOOL)isItalic range:(NSRange)range;
 
 -(void)setTextColor:(UIColor*)color;

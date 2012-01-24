@@ -37,6 +37,8 @@
     [self setTextColor:[UIColor clearColor]];
     [self setFont:[UIFont fontWithName:@"Menlo" size:_fontSize]];
     [self setText:self.text];
+    [self setDataDetectorTypes:0];
+
 }
 
 
@@ -133,8 +135,7 @@
     }
     
     short int cfontSize = self.font.lineHeight;
-    
-    
+        
     CGRect r = self.bounds;
     r.origin.y = self.contentOffset.y;
 
@@ -146,7 +147,6 @@
 		// flipping the context to draw core text
 		// no need to flip our typographical bounds from now on
 		CGContextConcatCTM(ctx, CGAffineTransformScale(CGAffineTransformMakeTranslation(0, r.size.height+6.5), 1.f, -1.f));
-
         
         NSMutableAttributedString* attrStrWithLinks = [self.attributedText mutableCopy];
         
@@ -162,6 +162,7 @@
             NSInteger fromlocation = 0;
             
             int linesheight = 0;
+            
             
             for (NSString* paragraph in paragraphs) {
                 
@@ -215,9 +216,19 @@
             }
             
             
-           // NSLog(@"%d", delta);
             
             CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attrStrWithLinks);
+            
+            
+            double width = self.bounds.size.width-8;
+            // Initialize those variables.
+            
+            
+            // Create a typesetter using the attributed string.
+            CTTypesetterRef typesetter = CTTypesetterCreateWithAttributedString((CFAttributedStringRef)attrStrWithLinks);
+            // Find a break for line from the beginning of the string to the given width.
+            
+            
             
             drawingRect = CGRectMake(0, -r.origin.y, self.bounds.size.width-8, r.size.height+delta);
             
@@ -226,13 +237,55 @@
             
             textFrame = CTFramesetterCreateFrame(framesetter, CFRangeMake(fromlocation,0), path, NULL);
 
-                        
+            // ---------------
+            CFArrayRef lines = CTFrameGetLines(textFrame);
+            CFIndex lineCount = CFArrayGetCount(lines);
+            CGPoint lineOrigins[lineCount];
+            CTFrameGetLineOrigins(textFrame, CFRangeMake(0,0), lineOrigins);
+            for (CFIndex lineIndex = 0; lineIndex  < lineCount; lineIndex++) {
+                CTLineRef line = CFArrayGetValueAtIndex(lines, lineIndex);
+                CFRange _r = CTLineGetStringRange(line);
+                
+                
+                
+                NSString *string = [[attrStrWithLinks string] substringWithRange:NSMakeRange(_r.location+_r.length-1, 1)];
+                
+                BOOL drawnew = NO;
+                
+                if ([string isEqualToString:@"/"] || [string isEqualToString:@":"]) {
+                    
+//                    drawnew = YES;
+//          
+//                    CFIndex count = CTTypesetterSuggestLineBreak(typesetter, _r.location, width);
+//                    CTLineRef newline = CTTypesetterCreateLine(typesetter, CFRangeMake(_r.location, count));
+//                    CFRange __r = CTLineGetStringRange(newline);
+
+                    NSLog(@"%@", [[attrStrWithLinks string] substringWithRange:NSMakeRange(_r.location, _r.length)]);
+                    
+                    
+                    
+                }
+                
+                
+                CGContextSetTextPosition(ctx, lineOrigins[lineIndex].x, lineOrigins[lineIndex].y-r.origin.y);
+                if (drawnew) {
+//                    CTLineDraw(newline, ctx);
+                } else {
+                    CTLineDraw(line, ctx);
+                }
+                
+                
+//                CFRelease(newline);
+            }
+            // ---------------
+
+            
 			CGPathRelease(path);
 			CFRelease(framesetter);
 		}
 		
 		
-		CTFrameDraw(textFrame, ctx);
+//		CTFrameDraw(textFrame, ctx);
         
 		CGContextRestoreGState(ctx);
     }

@@ -146,13 +146,11 @@ BOOL CTRunContainsCharactersFromStringRange(CTRunRef run, NSRange range) {
 }
 
 - (void)setFontName:(NSString*)fontName size:(CGFloat)size lineHeight:(CGFloat)lineHeight {
-	[self setFontName:fontName size:size range:NSMakeRange(0,[self length]) lineHeight:lineHeight];
+	[self setFontName:fontName size:size range:NSMakeRange(0, [self length]) lineHeight:lineHeight];
 }
 
 - (void)setFontName:(NSString*)fontName size:(CGFloat)size range:(NSRange)range lineHeight:(CGFloat)lineHeight {
-    
-    NSLog(@"%f", lineHeight);
-    
+        
     CGAffineTransform myTextTransform =  CGAffineTransformMakeScale(1, 1);
     
 	CTFontRef aFont = CTFontCreateWithName((CFStringRef)fontName, size, &myTextTransform);

@@ -1,0 +1,11 @@
+Subclass of UITextView with syntax highlighting for iOS 5.0 not finished (just sample)
+
+With new iOS 6.0 everyone junior developer can do code editor application with syntax highlighting. Because *UITextView* has attribute *attributedText*, which has enough parameters and functionality for it.
+
+So, I want to say, my old project does not have sense. :)
+
+The last build shared on git hub and everyone can modify it and try to finish, because it still not completed. Still has a problem with word wrap.
+
+Maybe someone will get something new for self. Because this project used CoreText and CoreGraphics framework.
+
+Enjoy!

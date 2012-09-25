@@ -3,7 +3,7 @@
 //  textview
 //
 //  Created by Volodymyr Boichentsov on 10/22/11.
-//  Copyright (c) 2011 www.injoit.com. All rights reserved.
+//  Copyright (c) 2011 www.developers-life.com. All rights reserved.
 //
 
 #import "ViewController.h"

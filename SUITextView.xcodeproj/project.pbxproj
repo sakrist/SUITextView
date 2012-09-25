@@ -147,7 +147,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0420;
-				ORGANIZATIONNAME = www.injoit.com;
+				ORGANIZATIONNAME = "www.developers-life.com";
 			};
 			buildConfigurationList = D2DE67A8145356330051C964 /* Build configuration list for PBXProject "SUITextView" */;
 			compatibilityVersion = "Xcode 3.2";

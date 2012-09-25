@@ -220,15 +220,13 @@
             CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attrStrWithLinks);
             
             
-            double width = self.bounds.size.width-8;
+//            double width = self.bounds.size.width-8;
             // Initialize those variables.
-            
-            
+        
             // Create a typesetter using the attributed string.
-            CTTypesetterRef typesetter = CTTypesetterCreateWithAttributedString((CFAttributedStringRef)attrStrWithLinks);
+//            CTTypesetterRef typesetter = CTTypesetterCreateWithAttributedString((CFAttributedStringRef)attrStrWithLinks);
+        
             // Find a break for line from the beginning of the string to the given width.
-            
-            
             
             drawingRect = CGRectMake(0, -r.origin.y, self.bounds.size.width-8, r.size.height+delta);
             
@@ -259,11 +257,6 @@
 //                    CFIndex count = CTTypesetterSuggestLineBreak(typesetter, _r.location, width);
 //                    CTLineRef newline = CTTypesetterCreateLine(typesetter, CFRangeMake(_r.location, count));
 //                    CFRange __r = CTLineGetStringRange(newline);
-
-                    NSLog(@"%@", [[attrStrWithLinks string] substringWithRange:NSMakeRange(_r.location, _r.length)]);
-                    
-                    
-                    
                 }
                 
                 
@@ -286,7 +279,6 @@
 		
 		
 //		CTFrameDraw(textFrame, ctx);
-        
 		CGContextRestoreGState(ctx);
     }
     [super drawRect:aRect];

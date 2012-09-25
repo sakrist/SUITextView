@@ -94,7 +94,6 @@
 			children = (
 				D2DE67C1145356330051C964 /* AppDelegate.h */,
 				D2DE67C2145356330051C964 /* AppDelegate.m */,
-				D2DE67C4145356330051C964 /* MainStoryboard.storyboard */,
 				D2DE67C7145356330051C964 /* ViewController.h */,
 				D2DE67C8145356330051C964 /* ViewController.m */,
 				D2DE67D9145359790051C964 /* NSAttributedString+Attributes.h */,
@@ -111,6 +110,7 @@
 		D2DE67B9145356330051C964 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D2DE67C4145356330051C964 /* MainStoryboard.storyboard */,
 				D2DE67BA145356330051C964 /* textview-Info.plist */,
 				D2DE67BB145356330051C964 /* InfoPlist.strings */,
 				D27F0F89145DC739008D80C9 /* Menlo.ttc */,

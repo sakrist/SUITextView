@@ -26,14 +26,14 @@
 		D27F0F89145DC739008D80C9 /* Menlo.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Menlo.ttc; sourceTree = SOURCE_ROOT; };
 		D2C9246514670A2E008485B2 /* CUITextViewHighlighting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUITextViewHighlighting.h; sourceTree = "<group>"; };
 		D2C9246614670A2E008485B2 /* CUITextViewHighlighting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CUITextViewHighlighting.m; sourceTree = "<group>"; };
-		D2DE67AE145356330051C964 /* textview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = textview.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2DE67AE145356330051C964 /* SUITextView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SUITextView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2DE67B2145356330051C964 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D2DE67B4145356330051C964 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2DE67B6145356330051C964 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		D2DE67BA145356330051C964 /* textview-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "textview-Info.plist"; sourceTree = "<group>"; };
+		D2DE67BA145356330051C964 /* SUITextView-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SUITextView-Info.plist"; sourceTree = "<group>"; };
 		D2DE67BC145356330051C964 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D2DE67BE145356330051C964 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D2DE67C0145356330051C964 /* textview-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "textview-Prefix.pch"; sourceTree = "<group>"; };
+		D2DE67C0145356330051C964 /* SUITextView-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SUITextView-Prefix.pch"; sourceTree = "<group>"; };
 		D2DE67C1145356330051C964 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D2DE67C2145356330051C964 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D2DE67C5145356330051C964 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
@@ -73,7 +73,7 @@
 		D2DE67AF145356330051C964 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2DE67AE145356330051C964 /* textview.app */,
+				D2DE67AE145356330051C964 /* SUITextView.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -111,11 +111,11 @@
 			isa = PBXGroup;
 			children = (
 				D2DE67C4145356330051C964 /* MainStoryboard.storyboard */,
-				D2DE67BA145356330051C964 /* textview-Info.plist */,
+				D2DE67BA145356330051C964 /* SUITextView-Info.plist */,
 				D2DE67BB145356330051C964 /* InfoPlist.strings */,
 				D27F0F89145DC739008D80C9 /* Menlo.ttc */,
 				D2DE67BE145356330051C964 /* main.m */,
-				D2DE67C0145356330051C964 /* textview-Prefix.pch */,
+				D2DE67C0145356330051C964 /* SUITextView-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -123,9 +123,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D2DE67AD145356330051C964 /* textview */ = {
+		D2DE67AD145356330051C964 /* SUITextView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D2DE67CC145356330051C964 /* Build configuration list for PBXNativeTarget "textview" */;
+			buildConfigurationList = D2DE67CC145356330051C964 /* Build configuration list for PBXNativeTarget "SUITextView" */;
 			buildPhases = (
 				D2DE67AA145356330051C964 /* Sources */,
 				D2DE67AB145356330051C964 /* Frameworks */,
@@ -135,9 +135,9 @@
 			);
 			dependencies = (
 			);
-			name = textview;
+			name = SUITextView;
 			productName = textview;
-			productReference = D2DE67AE145356330051C964 /* textview.app */;
+			productReference = D2DE67AE145356330051C964 /* SUITextView.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -149,7 +149,7 @@
 				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = www.injoit.com;
 			};
-			buildConfigurationList = D2DE67A8145356330051C964 /* Build configuration list for PBXProject "textview" */;
+			buildConfigurationList = D2DE67A8145356330051C964 /* Build configuration list for PBXProject "SUITextView" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -161,7 +161,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D2DE67AD145356330051C964 /* textview */,
+				D2DE67AD145356330051C964 /* SUITextView */,
 			);
 		};
 /* End PBXProject section */
@@ -267,11 +267,11 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "textview/textview-Prefix.pch";
+				GCC_PREFIX_HEADER = "textview/SUITextView-Prefix.pch";
 				GCC_VERSION = "";
-				INFOPLIST_FILE = "textview/textview-Info.plist";
+				INFOPLIST_FILE = "textview/SUITextView-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SUITextView;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -281,11 +281,11 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "textview/textview-Prefix.pch";
+				GCC_PREFIX_HEADER = "textview/SUITextView-Prefix.pch";
 				GCC_VERSION = "";
-				INFOPLIST_FILE = "textview/textview-Info.plist";
+				INFOPLIST_FILE = "textview/SUITextView-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SUITextView;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -293,7 +293,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D2DE67A8145356330051C964 /* Build configuration list for PBXProject "textview" */ = {
+		D2DE67A8145356330051C964 /* Build configuration list for PBXProject "SUITextView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D2DE67CA145356330051C964 /* Debug */,
@@ -302,7 +302,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D2DE67CC145356330051C964 /* Build configuration list for PBXNativeTarget "textview" */ = {
+		D2DE67CC145356330051C964 /* Build configuration list for PBXNativeTarget "SUITextView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D2DE67CD145356330051C964 /* Debug */,

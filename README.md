@@ -16,9 +16,7 @@ License: [MIT](http://opensource.org/licenses/MIT)
 
 -----
 
-Blog Post http://www.developers-life.com/uitextview-with-syntax-highlighting-for-ios-5-0-not-finished.html<br />
 
------
 
 If you like it, you can support me:
 
